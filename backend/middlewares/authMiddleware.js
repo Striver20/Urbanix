@@ -55,7 +55,6 @@ const isAdmin = async (req, res, next) => {
         message: "Unauthorized access",
       });
     }
-
     next();
   } catch (err) {
     console.error("Error checking admin: " + err.message);

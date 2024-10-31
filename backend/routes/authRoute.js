@@ -22,13 +22,13 @@ router.get("/test", requireSignIn, isAdmin, testController);
 router.post("/send-otp", sendOTPController);
 router.post("/verify-otp", verifyOTPController);
 
-// Protected Route Auth
+// Protected User Auth Route
 router.get("/user-auth", requireSignIn, (req, res) => {
   res.status(200).send({ ok: true });
 });
 
-// Admin Route
-router.get("/admin-auth", requireSignIn, (req, res) => {
+// Admin Auth Route
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
   res.status(200).send({ ok: true });
 });
 
