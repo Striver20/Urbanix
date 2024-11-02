@@ -106,7 +106,7 @@ const sendOTPController = (req, res) => {
   });
 
   const mailOptions = {
-    from: "vermaashitiit@gmail.com",
+    from: USER_EMAIL,
     to: emailAddress,
     subject: "OTP Verification",
     text: `Your OTP is ${OTP}`,
