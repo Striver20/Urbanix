@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
-
+import UserMenu from "./UserMenu";
+import { Outlet } from "react-router-dom";
+import AuthContext from "../context/auth";
 const Dashboard = () => {
+  const { auth } = useContext(AuthContext);
+  console.log(auth);
   return (
-    <Layout>
-      <h1>
-        Welcome to your dashboard. Here you can manage your products, orders,
-        and more.
-        <br />
-        <br />
-        Please note that this is a placeholder for your dashboard.
-        <br />
-        <br />
-        You can customize and enhance this dashboard as per your needs.
-        <br />
-        <br />
-        For more information, please visit our documentation or contact our
-        support team.
-      </h1>
+    <Layout title={"Dashboard- Urbanix App"}>
+      <div className="container-fluid m-3 p-3">
+        <div className="row">
+          <div className="col-md-3">
+            <UserMenu />
+          </div>
+          <div className="col-md-9">
+            <div className="card w-75 p-3">
+              {/* Since auth contains only user name so only that can be assessed with it. To get email and password too get access to localstorage*/}
+              <h3> {auth?.user}</h3>
+            </div>
+            {/* Content from nested routes will be rendered here */}
+            <Outlet />
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };

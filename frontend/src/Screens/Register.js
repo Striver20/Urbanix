@@ -13,7 +13,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic here
     try {
       const data = {
         name,
@@ -42,7 +41,6 @@ const Register = () => {
     } catch (err) {
       console.log("Error sending registration data to backend: ", err.message);
     }
-    // Show success toast notification
   };
 
   return (

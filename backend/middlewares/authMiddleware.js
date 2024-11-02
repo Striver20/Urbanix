@@ -32,7 +32,7 @@ const requireSignIn = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
-  console.log("Entered");
+  console.log("Middleware: isAdmin");
   try {
     if (!req.user || !req.user.id) {
       return res.status(401).json({
@@ -48,8 +48,8 @@ const isAdmin = async (req, res, next) => {
         message: "User not found",
       });
     }
-
-    if (user.role !== "admin") {
+    console.log("User role:", user.role); // Log the role for debugging
+    if (user.role !== "admin ") {
       return res.status(403).json({
         success: false,
         message: "Unauthorized access",

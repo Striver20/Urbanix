@@ -18,16 +18,20 @@ const Login = () => {
         "http://localhost:8000/api/v1/auth/login",
         data
       );
-
-      if (res.status === 200) {
+      console.log(res.data);
+      if (res.data.success) {
         const userInfo = {
           user: res.data.user.name,
           token: res.data.token,
         };
         setInfo(userInfo);
-        console.log(res.data.user.role);
-        if (res.data.user.role === "user") navigate("/dashboard");
-        else if (res.data.user.role === "admin") navigate("/admin/dashboard");
+        if (res.data.user.role === "admin ") {
+          console.log("Admitting to admin dashboard");
+          navigate("/dashboard/admin"); // Navigate to the admin dashboard directly
+        } else if (res.data.user.role === "user") {
+          navigate("/dashboard/user"); // Navigate to the user dashboard
+        }
+
         toast.success("Logged in successfully");
       } else {
         console.log("Invalid Credentials");
