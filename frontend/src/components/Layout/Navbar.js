@@ -1,13 +1,17 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context/auth";
 import { useNavigate } from "react-router-dom";
+import SearchInput from "./Form/SearchInput";
+
 const Navbar = () => {
   const { auth, setInfo } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const logout = () => {
     setInfo(null);
     navigate("/login");
   };
+
   return (
     <nav className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +65,10 @@ const Navbar = () => {
               )}
             </div>
           </div>
-          <div className="flex items-center">
+
+          <SearchInput />
+
+          <div className="flex items-center ml-4">
             <div className="flex-shrink-0">
               <a
                 href="/cart"

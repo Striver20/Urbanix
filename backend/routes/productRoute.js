@@ -7,6 +7,10 @@ const {
   productPhotoController,
   deleteProductController,
   updateProductController,
+  filterProductController,
+  productCountController,
+  productListController,
+  searchProductController,
 } = require("../controllers/productController");
 const formidable = require("express-formidable");
 const { get } = require("mongoose");
@@ -43,4 +47,17 @@ router.get("/product-photo/:id", productPhotoController);
 
 // delete product
 router.delete("/delete-product/:id", deleteProductController);
+
+// filter product
+router.post("/filter-product", filterProductController);
+
+// product count
+router.get("/product-count", productCountController);
+
+//poduct per page
+router.get("/product-list/:page", productListController);
+
+// search product
+router.get("/search-product/:keyword", searchProductController);
+
 module.exports = router;

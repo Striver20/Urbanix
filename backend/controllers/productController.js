@@ -133,7 +133,6 @@ const getSingleProductController = async (req, res) => {
 const productPhotoController = async (req, res) => {
   try {
     const product = await Products.findById(req.params.id).select("photo");
-    console.log(product);
     if (!product) {
       return res
         .status(404)
@@ -157,7 +156,6 @@ const productPhotoController = async (req, res) => {
 // delete controller
 const deleteProductController = async (req, res) => {
   try {
-    console.log("Entered backend");
     console.log(req.params.pid);
     const product = await Products.findByIdAndDelete(req.params.id).select(
       "-photo"
@@ -176,6 +174,80 @@ const deleteProductController = async (req, res) => {
   }
 };
 
+const filterProductController = async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+    let args = {};
+    if (checked.length > 0) args.category = checked;
+    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    const products = await Products.find(args);
+    res.status(200).send({
+      success: true,
+      message: "Filtered Products fetched successfully",
+      products: products,
+    });
+  } catch (err) {
+    console.log("Error filtering product: ", err.message);
+  }
+};
+
+// product count
+const productCountController = async (req, res) => {
+  try {
+    const total = await Products.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      message: "Product count fetched successfully",
+      total: total,
+    });
+  } catch (err) {
+    console.log("Error counting products: ", err.message);
+  }
+};
+
+// product list based on page
+const productListController = async (req, res) => {
+  try {
+    const perPage = 4;
+    const page = req.params.page
+      ? req.params.page
+      : console.log("Entered product list: ", page);
+    const products = await Products.find({})
+      .select("-photo")
+      .skip((page - 1) * perPage)
+      .limit(perPage)
+      .sort({ createdAt: -1 });
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (err) {
+    console.log("Error fetching product list: ", err.message);
+  }
+};
+
+// product search
+const searchProductController = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const result = await Products.find({
+      $or: [
+        { name: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+        { slug: { $regex: keyword, $options: "i" } },
+      ],
+    }).select("-photo");
+    res.status(200).send({
+      success: true,
+      message: "Product search fetched successfully",
+      products: result,
+      // Products is what u use to search like response.data.products
+    });
+  } catch (err) {
+    console.log("Error searching product: ", err.message);
+  }
+};
+
 module.exports = {
   createProductController,
   updateProductController,
@@ -183,4 +255,8 @@ module.exports = {
   getSingleProductController,
   productPhotoController,
   deleteProductController,
+  filterProductController,
+  productCountController,
+  productListController,
+  searchProductController,
 };
