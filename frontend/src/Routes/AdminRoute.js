@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react";
-import AuthContext from "../context/auth";
+import { useAuth } from "../context/auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Layout/Spinner";
 
 const AdminRoute = ({ children }) => {
   const [ok, setOk] = useState(false);
-  const { auth } = useContext(AuthContext);
+  const { auth } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

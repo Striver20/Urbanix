@@ -6,7 +6,7 @@ const UserMenu = () => {
     <>
       <div className="text-center">
         <div className="list-outside">
-          <h1>Admin Panel</h1>
+          <h1>User Panel</h1>
           <div className="flex flex-col m-2">
             <NavLink
               to="/dashboard/user/profile"

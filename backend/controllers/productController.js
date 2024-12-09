@@ -1,6 +1,8 @@
 const fs = require("fs");
 const Products = require("../models/productModel");
 const slugify = require("slugify");
+const categoryModel = require("../models/categoryModel");
+const productModel = require("../models/productModel");
 // create product
 const createProductController = async (req, res) => {
   try {
@@ -248,6 +250,54 @@ const searchProductController = async (req, res) => {
   }
 };
 
+const relatedProductController = async (req, res) => {
+  try {
+    const { pid, cid } = req.params;
+    const product = await Products.find({
+      category: cid,
+      _id: { $ne: pid },
+    })
+      .select("-photo")
+      .limit(3)
+      .populate("category");
+
+    res.status(200).send({
+      success: true,
+      message: "Related products fetched successfully",
+      products: product,
+    });
+  } catch (err) {
+    console.log("Error getting related products: ", err.message);
+    res.status(400).send({
+      success: false,
+      message: "Error getting related products",
+      error: err.message,
+    });
+  }
+};
+
+// get products by category
+const productCategoryController = async (req, res) => {
+  try {
+    const category = await categoryModel.findOne({
+      slug: req.params.slug,
+    });
+    const products = await productModel.find({ category }).populate("category");
+    res.status(200).send({
+      success: true,
+      category,
+      products,
+    });
+  } catch (err) {
+    console.log("Error getting products by category: ", err.message);
+    res.status(400).send({
+      success: false,
+      err,
+      message: "Error getting products by category",
+    });
+  }
+};
+
 module.exports = {
   createProductController,
   updateProductController,
@@ -259,4 +309,6 @@ module.exports = {
   productCountController,
   productListController,
   searchProductController,
+  relatedProductController,
+  productCategoryController,
 };

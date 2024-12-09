@@ -43,12 +43,10 @@ const updateCategoryController = async (req, res) => {
     const { name, description } = req.body;
     const id = req.params.id; // Fixed parameter extraction
     if (!name || !description) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Name and Description both are required",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Name and Description both are required",
+      });
     }
 
     const category = await categoryModel.findByIdAndUpdate(

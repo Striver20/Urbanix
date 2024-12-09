@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import AuthContext from "../context/auth";
+import { useAuth, setAuth } from "../context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setInfo } = useContext(AuthContext);
+  const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,20 +18,18 @@ const Login = () => {
         "http://localhost:8000/api/v1/auth/login",
         data
       );
-      console.log(res.data);
-      if (res.data.success) {
-        const userInfo = {
-          user: res.data.user.name,
+      if (res && res.data.success) {
+        setAuth({
+          ...auth,
+          user: res.data.user,
           token: res.data.token,
-        };
-        setInfo(userInfo);
+        });
         if (res.data.user.role === "admin ") {
           console.log("Admitting to admin dashboard");
           navigate("/dashboard/admin"); // Navigate to the admin dashboard directly
         } else if (res.data.user.role === "user") {
           navigate("/dashboard/user"); // Navigate to the user dashboard
         }
-
         toast.success("Logged in successfully");
       } else {
         console.log("Invalid Credentials");

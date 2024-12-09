@@ -16,6 +16,9 @@ import Products from "./Admin/Products";
 import UpdateProduct from "./Admin/UpdateProduct";
 import Search from "./Screens/Search";
 import ProductDetails from "./Screens/ProductDetails";
+import Categories from "./Screens/Categories";
+import CategoryProduct from "./Screens/CategoryProduct";
+import CartPage from "./Screens/CartPage";
 
 const App = () => {
   return (
@@ -24,7 +27,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/product-details" element={<ProductDetails />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         {/* User Dashboard Route */}

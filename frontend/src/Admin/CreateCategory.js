@@ -3,14 +3,14 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryForm from "../components/Layout/Form/CategoryForm";
-import AuthContext from "../context/auth";
+import { useAuth } from "../context/auth";
 import { Modal } from "antd";
 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const auth = useContext(AuthContext);
+  const { auth } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");

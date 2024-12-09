@@ -6,9 +6,9 @@ const nodemailer = require("nodemailer");
 let otpStore = {};
 
 const registerController = async (req, res) => {
-  const { name, email, password, phone, role } = req.body;
+  const { name, email, password, phone, address, role } = req.body;
   try {
-    if (!name || !email || !password || !phone || !role) {
+    if (!name || !email || !password || !phone || !address || !role) {
       return res.status(400).send({
         success: false,
         message: "All fields are required",
@@ -27,6 +27,7 @@ const registerController = async (req, res) => {
       email,
       password: hashedPassword,
       phone,
+      address,
       role,
     });
     return res.status(201).send({
@@ -35,7 +36,7 @@ const registerController = async (req, res) => {
       data: newUser,
     });
   } catch (err) {
-    console.error("Error creating user", err.message);
+    console.error("Error creating user: ", err.message);
     return res.status(500).send({
       success: false,
       message: "Error creating user",
@@ -67,6 +68,7 @@ const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        address: user.address,
         role: user.role,
       },
       process.env.JWT_SECRET,
@@ -159,10 +161,62 @@ const testController = (req, res) => {
   });
 };
 
+const updateProfileController = async (req, res) => {
+  try {
+    const { name, email, password, phone, address } = req.body;
+    console.log(req.body);
+    // Fetch the user from the database
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Validate and hash password if provided
+    let hashedPassword;
+    if (password) {
+      if (password.length < 6) {
+        return res.status(400).json({
+          success: false,
+          error: "Password must be at least 6 characters long",
+        });
+      }
+      hashedPassword = await hashPassword(password); // Use the correct function
+    }
+
+    // Update the user's profile
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        name: name || user.name,
+        email: email || user.email,
+        password: hashedPassword || user.password,
+        phone: phone || user.phone,
+        address: address || user.address,
+      },
+      { new: true }
+    );
+
+    res.status(200).send({
+      success: true,
+      message: "Profile Updated Successfully",
+      updatedUser,
+    });
+  } catch (err) {
+    console.log("Error updating profile in backend: ", err.message);
+    res.status(500).json({
+      success: false,
+      error: "Internal Server Error",
+    });
+  }
+};
+
 module.exports = {
   loginController,
   registerController,
   sendOTPController,
   verifyOTPController,
   testController,
+  updateProfileController,
 };

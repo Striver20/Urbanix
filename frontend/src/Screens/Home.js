@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAuth } from "../context/auth";
 import { Checkbox, Radio } from "antd";
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useCart } from "../context/cart";
 import { Prices } from "../components/Layout/Prices";
+
 const Home = () => {
+  const navigate = useNavigate();
+  const { cart, setCart } = useCart();
   const [auth, setAuth] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -16,7 +19,7 @@ const Home = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  // get total count of products
+
   const getTotalCount = async () => {
     try {
       const response = await axios.get(
@@ -28,20 +31,20 @@ const Home = () => {
     }
   };
 
-  // get all products
-  const getAllProducts = async (req, res) => {
+  const getAllProducts = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
         `http://localhost:8000/api/v1/product/product-list/${page}`
       );
-      setProducts(response.data.products);
+      setProducts(response.data?.products);
       setLoading(false);
     } catch (err) {
       setLoading(false);
       console.log("Error getting products: ", err.message);
     }
   };
+
   const getAllCategories = async () => {
     try {
       const token = auth.token;
@@ -53,7 +56,6 @@ const Home = () => {
           },
         }
       );
-
       if (response.data.success) {
         setCategories(response.data.data);
       }
@@ -64,15 +66,13 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // Initially we are getting all products on front page
     if (!checked.length && !radio.length) getAllProducts();
-    if (checked.length || radio.length) filterProdcut();
+    if (checked.length || radio.length) filterProduct();
     getAllCategories();
     getTotalCount();
   }, [checked.length, radio.length]);
 
-  // get filtered products
-  const filterProdcut = async () => {
+  const filterProduct = async () => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/v1/product/filter-product",
@@ -84,7 +84,6 @@ const Home = () => {
     }
   };
 
-  // load more
   const loadMore = async (currentPage) => {
     try {
       setLoading(true);
@@ -102,20 +101,18 @@ const Home = () => {
     }
   };
 
-  // filter by category
   const handleFilter = (value, id) => {
-    let all = [...checked];
-    if (value) all.push(id);
-    else all.filter((c) => c !== id);
+    const all = value ? [...checked, id] : checked.filter((c) => c !== id);
     setChecked(all);
   };
 
   return (
-    <Layout title={"All Prodcuts - Best Offers"}>
-      <div className="row">
-        <div className="col-md-3">
-          <h4 className="text-center">Filter By Category</h4>
-          <div className="d-flex flex-col">
+    <Layout title="All Products - Best Offers">
+      <div className="flex flex-col md:flex-row gap-8 p-4">
+        {/* Filter Section */}
+        <div className="w-full md:w-1/4 bg-gray-100 p-4 rounded-lg shadow-md">
+          <h4 className="text-lg font-bold mb-4">Filter By Category</h4>
+          <div className="space-y-2">
             {categories.map((category) => (
               <Checkbox
                 key={category._id}
@@ -126,52 +123,74 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Price Filter */}
-          <h4 className="text-center mt-4">Filter By Price</h4>
-          <div className="d-flex flex-col">
+          <h4 className="text-lg font-bold mt-6">Filter By Price</h4>
+          <div className="mt-2">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              {Prices?.map((price) => (
-                <div>
-                  <Radio key={price._id} value={price.array}>
-                    {price.name}
-                  </Radio>
+              {Prices.map((price) => (
+                <div key={price._id}>
+                  <Radio value={price.array}>{price.name}</Radio>
                 </div>
               ))}
             </Radio.Group>
           </div>
-          <div>
-            <button
-              className="btn btn-secondary bg-danger mt-4"
-              onClick={() => window.location.reload()}
-            >
-              Clear Filters
-            </button>
-          </div>
+
+          <button
+            className="w-full bg-red-600 text-white py-2 mt-6 rounded-lg shadow hover:bg-red-700"
+            onClick={() => window.location.reload()}
+          >
+            Clear Filters
+          </button>
         </div>
-        <div className="col-md-9">
-          <h1 className="text-center">All Products</h1>
-          <div className="d-flex flex-wrap overflow-x-hidden">
-            {products?.map((product) => (
-              <div className="h-full flex w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-col border-2 border-gray-500 rounded-md m-4">
+
+        {/* Products Section */}
+        <div className="w-full md:w-3/4">
+          <h1 className="text-2xl font-bold mb-6 text-center">All Products</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <div
+                key={product._id}
+                className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col"
+              >
                 <img
                   src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
-                  alt="Product Image"
-                  className="h-48 w-full object-cover rounded-t-md rounded-b-sm"
+                  alt={product.name}
+                  className="h-48 w-full object-cover"
                 />
-                <div className="p-4 flex flex-col justify-between flex-grow">
+                <div className="p-4 flex flex-col flex-grow">
                   <h5 className="text-lg font-semibold">{product.name}</h5>
                   <p className="text-gray-700 text-sm mt-2">
-                    {product.description.substring(0, 30) + "..."}
+                    {product.description.substring(0, 30)}...
                   </p>
-                  <h5 className="text-lg font-semibold">{product.price}</h5>
-                  <button class="btn btn-primary ">See details</button>
-                  <button class="btn btn-secondary">Add to Cart</button>
+                  <h5 className="text-lg font-semibold mt-2">
+                    ${product.price}
+                  </h5>
+                  <div className="mt-4 space-y-2">
+                    <button
+                      className="w-full bg-blue-600 text-white py-2 rounded-lg shadow hover:bg-blue-700"
+                      onClick={() => navigate(`/product/${product.slug}`)}
+                    >
+                      See Details
+                    </button>
+                    <button
+                      className="w-full bg-green-600 text-white py-2 rounded-lg shadow hover:bg-green-700"
+                      onClick={() => {
+                        setCart([...cart, product]);
+                        localStorage.setItem(
+                          "cart",
+                          JSON.stringify([...cart, product])
+                        );
+                        toast.success("Product added to cart");
+                      }}
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="m-2 p-3">
-            {products.length < total && (
+          {products.length < total && (
+            <div className="mt-8 text-center">
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -179,12 +198,12 @@ const Home = () => {
                   loadMore(nextPage);
                   setPage(nextPage);
                 }}
-                className="btn btn-primary"
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700"
               >
-                {loading ? "Loading..." : "Load more..."}
+                {loading ? "Loading..." : "Load More"}
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </Layout>

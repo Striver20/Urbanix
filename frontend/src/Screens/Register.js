@@ -8,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [role, setRole] = useState("");
   const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ const Register = () => {
         email,
         password,
         phone,
+        address,
         role,
       };
       const config = {
@@ -34,7 +36,7 @@ const Register = () => {
       if (response.data.success) {
         toast.success("Registration successful, Please Login!");
         console.log(response);
-        navigate("/");
+        navigate("/login");
       } else {
         toast.error(response.data.message);
       }
@@ -122,6 +124,22 @@ const Register = () => {
                 placeholder="Phone number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="name" className="sr-only">
+                Address
+              </label>
+              <input
+                id="address"
+                name="address"
+                type="text"
+                autoComplete="address"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
             <div>

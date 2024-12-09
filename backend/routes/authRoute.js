@@ -5,6 +5,7 @@ const {
   sendOTPController,
   testController,
   verifyOTPController,
+  updateProfileController,
 } = require("../controllers/authController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 const router = express.Router();
@@ -31,5 +32,8 @@ router.get("/user-auth", requireSignIn, (req, res) => {
 router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
   res.status(200).send({ ok: true });
 });
+
+// Update Profile
+router.put("/profile", requireSignIn, updateProfileController);
 
 module.exports = router;

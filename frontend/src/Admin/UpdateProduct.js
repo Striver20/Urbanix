@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import AuthContext from "../context/auth";
+import { useAuth } from "../context/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Select } from "antd";
@@ -9,8 +9,8 @@ const { Option } = Select;
 
 const UpdateProduct = () => {
   const navigate = useNavigate();
+  const { auth } = useAuth();
   const params = useParams();
-  const { auth } = useContext(AuthContext);
   const [categories, setCategories] = useState([]);
   const [photo, setPhoto] = useState(null);
   const [name, setName] = useState("");

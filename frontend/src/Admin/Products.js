@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../context/auth";
+import { useAuth } from "../context/auth";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const { auth } = useContext(AuthContext);
+  const { auth } = useAuth();
 
   const getAllProducts = async () => {
     const token = auth.token;
