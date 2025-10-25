@@ -18,6 +18,7 @@ A modern, full-featured e-commerce application built with the MERN stack (MongoD
 ## ✨ Features
 
 ### User Features
+
 - 🔐 **User Authentication** - Secure registration and login system
 - 🛍️ **Product Browsing** - Browse products by category
 - 🔍 **Search Functionality** - Search for products across the platform
@@ -28,6 +29,7 @@ A modern, full-featured e-commerce application built with the MERN stack (MongoD
 - 📱 **Responsive Design** - Mobile-friendly interface
 
 ### Admin Features
+
 - 📊 **Admin Dashboard** - Comprehensive admin panel
 - ➕ **Product Management** - Create, read, update, and delete products
 - 🏷️ **Category Management** - Manage product categories
@@ -37,6 +39,7 @@ A modern, full-featured e-commerce application built with the MERN stack (MongoD
 ## 🚀 Tech Stack
 
 ### Frontend
+
 - **React** - UI framework
 - **React Router DOM** - Client-side routing
 - **Ant Design** - UI component library
@@ -46,6 +49,7 @@ A modern, full-featured e-commerce application built with the MERN stack (MongoD
 - **React Toastify** - Toast notifications
 
 ### Backend
+
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
 - **MongoDB** - Database
@@ -103,6 +107,7 @@ Urbanix/
 ## 🔧 Installation
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - MongoDB (local or Atlas)
 - Git
@@ -110,22 +115,26 @@ Urbanix/
 ### Backend Setup
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/Striver20/Urbanix.git
 cd Urbanix
 ```
 
 2. Navigate to backend directory
+
 ```bash
 cd backend
 ```
 
 3. Install dependencies
+
 ```bash
 npm install
 ```
 
 4. Create a `.env` file in the backend directory
+
 ```env
 PORT=8000
 MONGO_URI=your_mongodb_connection_string
@@ -135,6 +144,7 @@ RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
 5. Start the backend server
+
 ```bash
 npm start
 ```
@@ -142,16 +152,19 @@ npm start
 ### Frontend Setup
 
 1. Navigate to frontend directory
+
 ```bash
 cd frontend
 ```
 
 2. Install dependencies
+
 ```bash
 npm install
 ```
 
 3. Start the development server
+
 ```bash
 npm start
 ```
@@ -161,10 +174,12 @@ The application will be available at `http://localhost:3000`
 ## ⚙️ Configuration
 
 ### MongoDB Setup
+
 - Create an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or use a local MongoDB instance
 - Copy the connection string and add it to your `.env` file
 
 ### Razorpay Setup
+
 1. Create an account on [Razorpay](https://razorpay.com/)
 2. Get your API keys from the dashboard
 3. Add the keys to your `.env` file
@@ -180,11 +195,13 @@ The application will be available at `http://localhost:3000`
 ## 🔌 API Endpoints
 
 ### Authentication
+
 - `POST /api/v1/auth/register` - Register new user
 - `POST /api/v1/auth/login` - User login
 - `GET /api/v1/auth/check-auth` - Verify authentication
 
 ### Products
+
 - `GET /api/v1/product/get-products` - Get all products
 - `GET /api/v1/product/get-product/:slug` - Get single product
 - `POST /api/v1/product/create-product` - Create product (Admin)
@@ -192,6 +209,7 @@ The application will be available at `http://localhost:3000`
 - `DELETE /api/v1/product/delete-product/:pid` - Delete product (Admin)
 
 ### Categories
+
 - `GET /api/v1/category/get-category` - Get all categories
 - `GET /api/v1/category/single-category/:slug` - Get single category
 - `POST /api/v1/category/create-category` - Create category (Admin)
