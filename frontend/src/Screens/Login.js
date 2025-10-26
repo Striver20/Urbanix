@@ -15,7 +15,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = { email, password };
-      const res = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, data);
+      const url = `${API_BASE_URL}/api/v1/auth/login`;
+      console.log("🚀 Login API Call:", url);
+      console.log("🔧 API_BASE_URL:", API_BASE_URL);
+      
+      const res = await axios.post(url, data);
       if (res && res.data.success) {
         setAuth({
           ...auth,

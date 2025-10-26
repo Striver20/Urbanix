@@ -2,7 +2,7 @@
 console.log("🔍 Environment Check:", {
   REACT_APP_BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
   REACT_APP_API_URL: process.env.REACT_APP_API_URL,
-  NODE_ENV: process.env.NODE_ENV
+  NODE_ENV: process.env.NODE_ENV,
 });
 
 export const API_BASE_URL =

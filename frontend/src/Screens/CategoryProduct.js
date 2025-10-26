@@ -19,9 +19,11 @@ const CategoryProduct = () => {
   const getProductByCategory = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(
-        `${API_BASE_URL}/api/v1/product/product-category/${params.slug}`
-      );
+      const url = `${API_BASE_URL}/api/v1/product/product-category/${params.slug}`;
+      console.log("🚀 CategoryProduct API Call:", url);
+      console.log("🔧 API_BASE_URL:", API_BASE_URL);
+      
+      const { data } = await axios.get(url);
       setProduct(data?.products);
       setCategory(data?.category.name);
     } catch (err) {
