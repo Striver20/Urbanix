@@ -17,7 +17,9 @@ connectDb();
 app.use(express.json());
 app.use(
   cors({
-    origin: true, // Allow all origins for now - fix CORS issue quickly
+    origin: process.env.NODE_ENV === 'production' 
+      ? ["https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app", process.env.FRONTEND_URL]
+      : "http://localhost:3000",
     credentials: true,
   })
 );
@@ -33,7 +35,7 @@ app.get("/", (req, res) => {
     success: true,
     message: "Urbanix API is running successfully!",
     version: "1.0.0",
-    environment: process.env.NODE_ENV || "development"
+    environment: process.env.NODE_ENV || "development",
   });
 });
 
@@ -42,7 +44,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({
     status: "OK",
     timestamp: new Date().toISOString(),
-    uptime: process.uptime()
+    uptime: process.uptime(),
   });
 });
 
