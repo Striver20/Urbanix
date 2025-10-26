@@ -1,8 +1,16 @@
 // API Configuration
+console.log("🔍 Environment Check:", {
+  REACT_APP_BACKEND_URL: process.env.REACT_APP_BACKEND_URL,
+  REACT_APP_API_URL: process.env.REACT_APP_API_URL,
+  NODE_ENV: process.env.NODE_ENV
+});
+
 export const API_BASE_URL =
   process.env.REACT_APP_BACKEND_URL ||
   process.env.REACT_APP_API_URL ||
-  "http://localhost:8000";
+  "https://urbanix-production.up.railway.app";
+
+console.log("🚀 Using API_BASE_URL:", API_BASE_URL);
 
 // API endpoints
 export const API_ENDPOINTS = {
