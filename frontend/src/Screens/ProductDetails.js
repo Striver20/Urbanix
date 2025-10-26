@@ -21,9 +21,15 @@ const Product = () => {
     }
     try {
       setLoading(true);
-      const response = await axios.get(
-        `${API_BASE_URL}/api/v1/product/get-product/${params.slug}`
-      );
+      const url = `${API_BASE_URL}/api/v1/product/get-product/${params.slug}`;
+      console.log("🚨 ProductDetails getProduct URL:", url);
+      console.log("🚨 API_BASE_URL:", API_BASE_URL);
+      
+      if (API_BASE_URL.includes('localhost')) {
+        console.error("🚨🚨🚨 ProductDetails STILL USING LOCALHOST!");
+      }
+      
+      const response = await axios.get(url);
       setProduct(response.data.product);
       getSimilarProducts(
         response.data?.product._id,
