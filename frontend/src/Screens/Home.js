@@ -6,6 +6,7 @@ import { Checkbox } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useCart } from "../context/cart";
+import { API_BASE_URL } from "../config/api";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Home = () => {
   const getTotalCount = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/product/product-count"
+        `${API_BASE_URL}/api/v1/product/product-count`
       );
       setTotal(response.data.total);
     } catch (err) {
@@ -33,7 +34,7 @@ const Home = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:8000/api/v1/product/product-list/${page}`
+        `${API_BASE_URL}/api/v1/product/product-list/${page}`
       );
       setProducts(response.data?.products);
       setLoading(false);
@@ -47,7 +48,7 @@ const Home = () => {
     try {
       const token = auth.token;
       const response = await axios.get(
-        "http://localhost:8000/api/v1/category/get-category",
+        `${API_BASE_URL}/api/v1/category/get-category`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,7 +74,7 @@ const Home = () => {
   const filterProduct = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/product/filter-product",
+        `${API_BASE_URL}/api/v1/product/filter-product`,
         { checked, radio: [] }
       );
       setProducts(response.data.products);
@@ -86,7 +87,7 @@ const Home = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:8000/api/v1/product/product-list/${currentPage}`
+        `${API_BASE_URL}/api/v1/product/product-list/${currentPage}`
       );
       setLoading(false);
       setProducts((prevProducts) => [
@@ -222,7 +223,7 @@ const Home = () => {
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                      src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                       alt={product.name}
                       className="h-64 w-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
