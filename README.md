@@ -4,8 +4,15 @@ A full-stack e-commerce web application built with React.js and Node.js, featuri
 
 ## 🌐 Live Demo
 
-- **Website**: [https://urbanix.vercel.app](https://urbanix.vercel.app) _(Update after deployment)_
-- **API**: [https://urbanix-backend.railway.app](https://urbanix-backend.railway.app) _(Update after deployment)_
+- **🌐 Website**: [https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app/](https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app/)
+- **🔗 API Backend**: [https://urbanix-production.up.railway.app/](https://urbanix-production.up.railway.app/)
+
+### 🧪 Test Live Features:
+- Browse products and categories
+- User registration and login
+- Shopping cart and checkout
+- Admin dashboard (register with role: "admin")
+- Search and filter functionality
 
 ## 📋 Table of Contents
 
@@ -190,7 +197,13 @@ REACT_APP_API_URL=http://localhost:8000
 
 ## 🚀 Deployment
 
-See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions using Vercel + Railway.
+✅ **Successfully Deployed!**
+
+- **Frontend**: Deployed on [Vercel](https://vercel.com) - Automatic deployments from GitHub
+- **Backend**: Deployed on [Railway](https://railway.app) - Container-based deployment  
+- **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) - Cloud database
+
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions.
 
 ## 🎯 Resume Highlights
 
