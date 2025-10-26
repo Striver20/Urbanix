@@ -3,6 +3,7 @@ import { useAuth } from "../context/auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Layout/Spinner";
+import { API_BASE_URL } from "../config/api";
 
 const AdminRoute = ({ children }) => {
   const [ok, setOk] = useState(false);
@@ -18,7 +19,7 @@ const AdminRoute = ({ children }) => {
         }
 
         const res = await axios.get(
-          "http://localhost:8000/api/v1/auth/admin-auth",
+          `${API_BASE_URL}/api/v1/auth/admin-auth`,
           {
             headers: {
               Authorization: `Bearer ${auth.token}`,

@@ -3,6 +3,7 @@ import { useAuth } from "../context/auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Layout/Spinner";
+import { API_BASE_URL } from "../config/api";
 
 const PrivateRoute = ({ children }) => {
   const [ok, setOk] = useState(false);
@@ -14,7 +15,7 @@ const PrivateRoute = ({ children }) => {
       try {
         console.log("Auth from private: ", auth.token);
         const res = await axios.get(
-          "http://localhost:8000/api/v1/auth/user-auth",
+          `${API_BASE_URL}/api/v1/auth/user-auth`,
           {
             headers: {
               Authorization: `Bearer ${auth.token}`,

@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ const Register = () => {
         },
       };
       const response = await axios.post(
-        "http://localhost:8000/api/v1/auth/register",
+        `${API_BASE_URL}/api/v1/auth/register`,
         data,
         config
       );

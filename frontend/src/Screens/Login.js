@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/auth";
+import { API_BASE_URL } from "../config/api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const Login = () => {
     try {
       const data = { email, password };
       const res = await axios.post(
-        "http://localhost:8000/api/v1/auth/login",
+        `${API_BASE_URL}/api/v1/auth/login`,
         data
       );
       if (res && res.data.success) {
