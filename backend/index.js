@@ -20,7 +20,8 @@ app.use(
     origin:
       process.env.NODE_ENV === "production"
         ? [
-            "https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app",
+            "https://urbanix-ewmi8xqbx-ashit-s-projects-37a24e1a.vercel.app", // NEW URL
+            "https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app", // OLD URL (fallback)
             process.env.FRONTEND_URL,
           ]
         : "http://localhost:3000",
