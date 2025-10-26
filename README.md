@@ -114,7 +114,7 @@ urbanix/
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/urbanix.git
+   git clone https://github.com/Striver20/Urbanix.git
    cd urbanix
    ```
 
@@ -230,11 +230,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**Your Name**
+**Ashit Verma**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+- GitHub: [@Striver20](https://github.com/Striver20)
+- LinkedIn: [Ashit Verma](https://www.linkedin.com/in/ashit-verma-6b7769337)
+- Email: ashitverma56@gmail.com
 
 ---
 
