@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../config/api";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,7 @@ const Products = () => {
     const token = auth.token;
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/product/get-product",
+        `${API_BASE_URL}/api/v1/product/get-product`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,7 +44,7 @@ const Products = () => {
           >
             <div className="h-full flex flex-col">
               <img
-                src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                 alt="Product Image"
                 className="h-48 w-full object-cover rounded-t-lg"
               />

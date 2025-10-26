@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Select } from "antd";
+import { API_BASE_URL } from "../config/api";
 const { Option } = Select;
 
 const CreateProduct = () => {
@@ -22,7 +23,7 @@ const CreateProduct = () => {
   const getAllCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/category/get-category",
+        `${API_BASE_URL}/api/v1/category/get-category`,
         {
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -51,7 +52,7 @@ const CreateProduct = () => {
       productData.append("category", category);
 
       const response = await axios.post(
-        "http://localhost:8000/api/v1/product/create-product",
+        `${API_BASE_URL}/api/v1/product/create-product`,
         productData,
         {
           headers: {

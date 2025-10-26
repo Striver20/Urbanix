@@ -14,14 +14,11 @@ const PrivateRoute = ({ children }) => {
     const authCheck = async () => {
       try {
         console.log("Auth from private: ", auth.token);
-        const res = await axios.get(
-          `${API_BASE_URL}/api/v1/auth/user-auth`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        );
+        const res = await axios.get(`${API_BASE_URL}/api/v1/auth/user-auth`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
         if (res.data.ok) {
           setOk(true);
         } else {

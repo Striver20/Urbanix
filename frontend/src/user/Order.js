@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from "../config/api";
 
 const Order = () => {
   const [auth] = useAuth();
@@ -12,7 +13,7 @@ const Order = () => {
   const fetchOrders = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/order/user-orders",
+        `${API_BASE_URL}/api/v1/order/user-orders`,
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,

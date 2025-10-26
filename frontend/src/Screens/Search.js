@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
 import { useSearch } from "../context/search";
+import { API_BASE_URL } from "../config/api";
 
 const Search = () => {
   const [values, setValues] = useSearch();
@@ -18,7 +19,7 @@ const Search = () => {
             {values?.results.map((product) => (
               <div className="h-full flex w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-col border-2 border-gray-500 rounded-md m-4">
                 <img
-                  src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                  src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                   alt="Product Image"
                   className="h-48 w-full object-cover rounded-t-md rounded-b-sm"
                 />

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../context/cart";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from "../config/api";
 
 const CategoryProduct = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const CategoryProduct = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:8000/api/v1/product/product-category/${params.slug}`
+        `${API_BASE_URL}/api/v1/product/product-category/${params.slug}`
       );
       setProduct(data?.products);
       setCategory(data?.category.name);
@@ -283,7 +284,7 @@ const CategoryProduct = () => {
                     {/* Grid View */}
                     <div className="relative overflow-hidden">
                       <img
-                        src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                        src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                         alt={product.name}
                         className="h-64 w-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
@@ -380,7 +381,7 @@ const CategoryProduct = () => {
                   <>
                     {/* List View */}
                     <img
-                      src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                      src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                       alt={product.name}
                       className="h-48 w-48 object-cover"
                     />

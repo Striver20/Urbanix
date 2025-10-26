@@ -5,6 +5,7 @@ import { useCart } from "../context/cart";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from "../config/api";
 
 const Checkout = () => {
   const [auth] = useAuth();
@@ -69,7 +70,7 @@ const Checkout = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8000/api/v1/order/create",
+        `${API_BASE_URL}/api/v1/order/create`,
         orderData,
         {
           headers: {
@@ -143,7 +144,7 @@ const Checkout = () => {
                     className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg"
                   >
                     <img
-                      src={`http://localhost:8000/api/v1/product/product-photo/${item._id}`}
+                      src={`${API_BASE_URL}/api/v1/product/product-photo/${item._id}`}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-lg"
                     />

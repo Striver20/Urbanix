@@ -3,6 +3,7 @@ import { useAuth } from "../context/auth";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { API_BASE_URL } from "../config/api";
 
 const Profile = () => {
   //context
@@ -29,7 +30,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        "http://localhost:8000/api/v1/auth/profile",
+        `${API_BASE_URL}/api/v1/auth/profile`,
         {
           name,
           email,

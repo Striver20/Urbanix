@@ -17,9 +17,13 @@ connectDb();
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.NODE_ENV === 'production' 
-      ? ["https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app", process.env.FRONTEND_URL]
-      : "http://localhost:3000",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? [
+            "https://urbanix-8uczmsw2r-ashit-s-projects-37a24e1a.vercel.app",
+            process.env.FRONTEND_URL,
+          ]
+        : "http://localhost:3000",
     credentials: true,
   })
 );

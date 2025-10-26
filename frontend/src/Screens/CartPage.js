@@ -3,6 +3,7 @@ import Layout from "../components/Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
+import { API_BASE_URL } from "../config/api";
 
 const CartPage = () => {
   const [auth] = useAuth();
@@ -84,7 +85,7 @@ const CartPage = () => {
                   {/* Product Image */}
                   <div className="flex-shrink-0">
                     <img
-                      src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                      src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                       alt={product.name}
                       className="w-32 h-32 object-cover rounded-xl shadow-md"
                     />

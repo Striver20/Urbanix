@@ -8,6 +8,7 @@ A full-stack e-commerce web application built with React.js and Node.js, featuri
 - **🔗 API Backend**: [https://urbanix-production.up.railway.app/](https://urbanix-production.up.railway.app/)
 
 ### 🧪 Test Live Features:
+
 - Browse products and categories
 - User registration and login
 - Shopping cart and checkout
@@ -200,7 +201,7 @@ REACT_APP_API_URL=http://localhost:8000
 ✅ **Successfully Deployed!**
 
 - **Frontend**: Deployed on [Vercel](https://vercel.com) - Automatic deployments from GitHub
-- **Backend**: Deployed on [Railway](https://railway.app) - Container-based deployment  
+- **Backend**: Deployed on [Railway](https://railway.app) - Container-based deployment
 - **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) - Cloud database
 
 See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions.

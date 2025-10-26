@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Select } from "antd";
+import { API_BASE_URL } from "../config/api";
 const { Option } = Select;
 
 const UpdateProduct = () => {
@@ -25,7 +26,7 @@ const UpdateProduct = () => {
   const getSingleProduct = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/v1/product/get-product/${params.slug}`,
+        `${API_BASE_URL}/api/v1/product/get-product/${params.slug}`,
         {
           headers: {
             Authorization: `Bearer ${auth.token}`,
@@ -43,7 +44,7 @@ const UpdateProduct = () => {
         setCategory(product.category._id);
         if (product.photo) {
           setPhoto(
-            `http://localhost:8000/api/v1/product/product-photo/${product._id}`
+            `${API_BASE_URL}/api/v1/product/product-photo/${product._id}`
           );
         }
       }
@@ -68,7 +69,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
 
       const response = await axios.put(
-        `http://localhost:8000/api/v1/product/update-product/${id}`,
+        `${API_BASE_URL}/api/v1/product/update-product/${id}`,
         productData,
         {
           headers: {
@@ -95,7 +96,7 @@ const UpdateProduct = () => {
       );
       if (!confirmUpdate) return;
       const response = await axios.delete(
-        `http://localhost:8000/api/v1/product/delete-product/${id}`,
+        `${API_BASE_URL}/api/v1/product/delete-product/${id}`,
         {
           header: {
             Authorization: `Bearer ${auth.token}`,
@@ -163,7 +164,7 @@ const UpdateProduct = () => {
         ) : (
           <div className="mb-4">
             <img
-              src={`http://localhost:8000/api/v1/product/product-photo/${id}`}
+              src={`${API_BASE_URL}/api/v1/product/product-photo/${id}`}
               alt="product-photo"
               className="w-full h-48 object-cover rounded-md"
             />

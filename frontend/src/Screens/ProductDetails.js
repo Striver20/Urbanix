@@ -4,6 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import Layout from "../components/Layout/Layout";
 import { useCart } from "../context/cart";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from "../config/api";
 
 const Product = () => {
   const params = useParams();
@@ -21,7 +22,7 @@ const Product = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://localhost:8000/api/v1/product/get-product/${params.slug}`
+        `${API_BASE_URL}/api/v1/product/get-product/${params.slug}`
       );
       setProduct(response.data.product);
       getSimilarProducts(
@@ -75,7 +76,7 @@ const Product = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/v1/product/related-products/${pid}/${cid}`
+        `${API_BASE_URL}/api/v1/product/related-products/${pid}/${cid}`
       );
       setRelatedProducts(response.data?.products);
     } catch (err) {
@@ -175,7 +176,7 @@ const Product = () => {
           <div className="flex justify-center">
             <div className="relative group">
               <img
-                src={`http://localhost:8000/api/v1/product/product-photo/${product._id}`}
+                src={`${API_BASE_URL}/api/v1/product/product-photo/${product._id}`}
                 className="w-full max-w-lg h-auto rounded-2xl shadow-2xl transition-transform duration-500 group-hover:scale-105"
                 alt={product.name}
               />
@@ -310,7 +311,7 @@ const Product = () => {
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={`http://localhost:8000/api/v1/product/product-photo/${relatedProduct._id}`}
+                      src={`${API_BASE_URL}/api/v1/product/product-photo/${relatedProduct._id}`}
                       alt={relatedProduct.name}
                       className="h-64 w-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />

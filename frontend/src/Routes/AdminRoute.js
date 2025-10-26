@@ -18,14 +18,11 @@ const AdminRoute = ({ children }) => {
           return;
         }
 
-        const res = await axios.get(
-          `${API_BASE_URL}/api/v1/auth/admin-auth`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.token}`,
-            },
-          }
-        );
+        const res = await axios.get(`${API_BASE_URL}/api/v1/auth/admin-auth`, {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
         if (res.data.ok) {
           setOk(true);
         } else {

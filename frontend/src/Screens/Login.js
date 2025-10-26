@@ -15,10 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = { email, password };
-      const res = await axios.post(
-        `${API_BASE_URL}/api/v1/auth/login`,
-        data
-      );
+      const res = await axios.post(`${API_BASE_URL}/api/v1/auth/login`, data);
       if (res && res.data.success) {
         setAuth({
           ...auth,

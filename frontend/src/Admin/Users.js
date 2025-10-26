@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/auth";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_BASE_URL } from "../config/api";
 
 const Users = () => {
   const [auth] = useAuth();
@@ -12,7 +13,7 @@ const Users = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/users",
+        `${API_BASE_URL}/api/v1/auth/users`,
         {
           headers: {
             Authorization: `Bearer ${auth?.token}`,
