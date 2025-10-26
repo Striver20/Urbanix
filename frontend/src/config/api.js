@@ -17,9 +17,9 @@ export const API_ENDPOINTS = {
   PRODUCTS: {
     BASE: `${API_BASE_URL}/api/v1/product`,
     PHOTO: (id) => `${API_BASE_URL}/api/v1/product/product-photo/${id}`,
-    FILTER: `${API_BASE_URL}/api/v1/product/product-filters`,
-    SEARCH: `${API_BASE_URL}/api/v1/product/search`,
-    SIMILAR: (pid, cid) => `${API_BASE_URL}/api/v1/product/related-product/${pid}/${cid}`,
+    FILTER: `${API_BASE_URL}/api/v1/product/filter-product`,
+    SEARCH: (keyword) => `${API_BASE_URL}/api/v1/product/search-product/${keyword}`,
+    SIMILAR: (pid, cid) => `${API_BASE_URL}/api/v1/product/related-products/${pid}/${cid}`,
   },
   
   // Category endpoints
@@ -31,7 +31,7 @@ export const API_ENDPOINTS = {
   
   // Order endpoints
   ORDERS: {
-    CREATE: `${API_BASE_URL}/api/v1/order/create-order`,
+    CREATE: `${API_BASE_URL}/api/v1/order/create`,
     USER_ORDERS: `${API_BASE_URL}/api/v1/order/user-orders`,
     ALL_ORDERS: `${API_BASE_URL}/api/v1/order/all-orders`,
     UPDATE_STATUS: (id) => `${API_BASE_URL}/api/v1/order/update-status/${id}`,
