@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryForm from "../components/Layout/Form/CategoryForm";
 import { useAuth } from "../context/auth";
+import { API_BASE_URL } from "../config/api";
 import { Modal } from "antd";
 
 const CreateCategory = () => {
@@ -26,7 +27,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/category/create-category",
+        `${API_BASE_URL}/api/v1/category/create-category`,
         { name, description },
         {
           headers: {
@@ -55,7 +56,7 @@ const CreateCategory = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/v1/category/update-category/${selected}`,
+        `${API_BASE_URL}/api/v1/category/update-category/${selected}`,
         { name: updatedName, description: updatedDescription },
         {
           headers: {
@@ -81,7 +82,7 @@ const CreateCategory = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/v1/category/delete-category/${id}`,
+        `${API_BASE_URL}/api/v1/category/delete-category/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -104,7 +105,7 @@ const CreateCategory = () => {
   const getAllCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/v1/category/get-category",
+        `${API_BASE_URL}/api/v1/category/get-category`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
