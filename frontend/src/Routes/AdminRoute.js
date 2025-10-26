@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/auth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,17 @@ import Spinner from "../components/Layout/Spinner";
 
 const AdminRoute = ({ children }) => {
   const [ok, setOk] = useState(false);
-  const { auth } = useAuth();
+  const [auth] = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const authCheck = async () => {
       try {
+        if (!auth?.token) {
+          setOk(false);
+          return;
+        }
+
         const res = await axios.get(
           "http://localhost:8000/api/v1/auth/admin-auth",
           {
@@ -23,16 +28,20 @@ const AdminRoute = ({ children }) => {
         if (res.data.ok) {
           setOk(true);
         } else {
-          <Spinner />;
           setOk(false);
         }
       } catch (err) {
-        <Spinner />;
+        console.error("Admin auth check error:", err);
         setOk(false);
       }
     };
-    authCheck();
-  }, [auth.token, navigate]);
+
+    if (auth?.token) {
+      authCheck();
+    } else {
+      setOk(false);
+    }
+  }, [auth?.token, navigate]);
 
   if (!ok) {
     return <Spinner />;

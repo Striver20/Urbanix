@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth, setAuth } from "../context/auth";
+import { useAuth } from "../context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,10 +24,11 @@ const Login = () => {
           user: res.data.user,
           token: res.data.token,
         });
-        if (res.data.user.role === "admin ") {
+        const userRole = res.data.user.role?.trim(); // Trim any whitespace from role
+        if (userRole === "admin") {
           console.log("Admitting to admin dashboard");
           navigate("/dashboard/admin"); // Navigate to the admin dashboard directly
-        } else if (res.data.user.role === "user") {
+        } else if (userRole === "user") {
           navigate("/dashboard/user"); // Navigate to the user dashboard
         }
         toast.success("Logged in successfully");

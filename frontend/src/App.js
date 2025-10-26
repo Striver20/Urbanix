@@ -14,11 +14,15 @@ import Order from "./user/Order";
 import Profile from "./user/Profile";
 import Products from "./Admin/Products";
 import UpdateProduct from "./Admin/UpdateProduct";
+import Users from "./Admin/Users";
 import Search from "./Screens/Search";
 import ProductDetails from "./Screens/ProductDetails";
 import Categories from "./Screens/Categories";
 import CategoryProduct from "./Screens/CategoryProduct";
 import CartPage from "./Screens/CartPage";
+import About from "./Screens/About";
+import Contact from "./Screens/Contact";
+import Checkout from "./Screens/Checkout";
 
 const App = () => {
   return (
@@ -30,7 +34,10 @@ const App = () => {
         <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         {/* User Dashboard Route */}
@@ -57,6 +64,7 @@ const App = () => {
           <Route path="create-category" element={<CreateCategory />} />
           <Route path="create-product" element={<CreateProduct />} />
           <Route path="products" element={<Products />} />
+          <Route path="users" element={<Users />} />
           <Route path="update-product/:slug" element={<UpdateProduct />} />
         </Route>
       </Routes>

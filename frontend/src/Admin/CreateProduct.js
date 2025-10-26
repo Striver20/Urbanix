@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
@@ -9,7 +9,7 @@ const { Option } = Select;
 
 const CreateProduct = () => {
   const navigate = useNavigate();
-  const { auth } = useAuth();
+  const [auth] = useAuth();
   const [categories, setCategories] = useState([]);
   const [photo, setPhoto] = useState(null);
   const [name, setName] = useState("");

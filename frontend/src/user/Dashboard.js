@@ -8,18 +8,19 @@ const Dashboard = () => {
   const [auth] = useAuth();
   return (
     <Layout title={"Dashboard - Urbanix App"}>
-      <div className="container-fluid m-3 p-3">
-        <div className="row">
-          <div className="col-md-3">
-            <UserMenu />
-          </div>
-          <div className="col-md-9">
-            <div className="card w-75 p-3">
-              {/* Accessing the user name */}
-              <h3>Welcome, {auth?.user?.name || "User"}!</h3>
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Sidebar */}
+            <div className="lg:w-80 flex-shrink-0">
+              <UserMenu />
             </div>
-            {/* Content from nested routes will be rendered here */}
-            <Outlet />
+
+            {/* Main Content */}
+            <div className="flex-1">
+              {/* Content from nested routes will be rendered here */}
+              <Outlet />
+            </div>
           </div>
         </div>
       </div>

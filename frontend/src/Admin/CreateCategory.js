@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,13 +10,13 @@ const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const { auth } = useAuth();
+  const [auth] = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
   const [updatedDescription, setUpdatedDescription] = useState("");
 
-  const token = auth.auth.token;
+  const token = auth?.token;
   // Show and hide modal
   const showModal = () => setIsModalOpen(true);
   const handleCancel = () => setIsModalOpen(false);
@@ -54,7 +54,6 @@ const CreateCategory = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const token = auth.auth.token;
       const response = await axios.put(
         `http://localhost:8000/api/v1/category/update-category/${selected}`,
         { name: updatedName, description: updatedDescription },
@@ -104,7 +103,6 @@ const CreateCategory = () => {
   // Fetch all categories
   const getAllCategories = async () => {
     try {
-      const token = auth.auth.token;
       const response = await axios.get(
         "http://localhost:8000/api/v1/category/get-category",
         {

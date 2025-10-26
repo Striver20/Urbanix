@@ -8,28 +8,45 @@ let otpStore = {};
 const registerController = async (req, res) => {
   const { name, email, password, phone, address, role } = req.body;
   try {
-    if (!name || !email || !password || !phone || !address || !role) {
+    // Trim all input fields to remove leading/trailing whitespace
+    const trimmedName = name?.trim();
+    const trimmedEmail = email?.trim();
+    const trimmedPhone = phone?.trim();
+    const trimmedAddress = address?.trim();
+    const trimmedRole = role?.trim();
+
+    if (
+      !trimmedName ||
+      !trimmedEmail ||
+      !password ||
+      !trimmedPhone ||
+      !trimmedAddress ||
+      !trimmedRole
+    ) {
       return res.status(400).send({
         success: false,
         message: "All fields are required",
       });
     }
-    const user = await User.findOne({ email: email });
+
+    const user = await User.findOne({ email: trimmedEmail });
     if (user) {
       return res.status(409).send({
         success: false,
         message: "User already exists",
       });
     }
+
     const hashedPassword = await hashPassword(password);
     const newUser = await User.create({
-      name,
-      email,
+      name: trimmedName,
+      email: trimmedEmail,
       password: hashedPassword,
-      phone,
-      address,
-      role,
+      phone: trimmedPhone,
+      address: trimmedAddress,
+      role: trimmedRole,
     });
+
     return res.status(201).send({
       success: true,
       message: "User created successfully",
@@ -161,12 +178,46 @@ const testController = (req, res) => {
   });
 };
 
+// Cleanup controller to fix existing users with trailing spaces in roles
+const cleanupRolesController = async (req, res) => {
+  try {
+    // Find all users with roles that have trailing/leading spaces
+    const users = await User.find({});
+    let updatedCount = 0;
+
+    for (const user of users) {
+      const trimmedRole = user.role?.trim();
+      if (user.role !== trimmedRole) {
+        await User.findByIdAndUpdate(user._id, { role: trimmedRole });
+        updatedCount++;
+        console.log(
+          `Updated user ${user.email}: "${user.role}" -> "${trimmedRole}"`
+        );
+      }
+    }
+
+    res.status(200).send({
+      success: true,
+      message: `Cleanup completed. Updated ${updatedCount} users.`,
+      updatedCount,
+    });
+  } catch (err) {
+    console.error("Error cleaning up roles: ", err.message);
+    res.status(500).send({
+      success: false,
+      message: "Error cleaning up roles",
+    });
+  }
+};
+
 const updateProfileController = async (req, res) => {
   try {
+    console.log("🔄 Profile update request received");
+    console.log("📧 User:", req.user?.id || "No user ID");
     const { name, email, password, phone, address } = req.body;
-    console.log(req.body);
+    console.log("📝 Request body:", req.body);
     // Fetch the user from the database
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user.id);
     if (!user) {
       return res
         .status(404)
@@ -187,7 +238,7 @@ const updateProfileController = async (req, res) => {
 
     // Update the user's profile
     const updatedUser = await User.findByIdAndUpdate(
-      req.user._id,
+      req.user.id,
       {
         name: name || user.name,
         email: email || user.email,
@@ -198,16 +249,45 @@ const updateProfileController = async (req, res) => {
       { new: true }
     );
 
+    console.log("✅ Profile updated successfully for user:", req.user.id);
     res.status(200).send({
       success: true,
       message: "Profile Updated Successfully",
       updatedUser,
     });
   } catch (err) {
-    console.log("Error updating profile in backend: ", err.message);
+    console.error("❌ Error updating profile:", err.message);
+    console.error("❌ Full error:", err);
     res.status(500).json({
       success: false,
       error: "Internal Server Error",
+      message: err.message,
+    });
+  }
+};
+
+// Get all users (Admin only)
+const getAllUsersController = async (req, res) => {
+  try {
+    console.log("🔍 Fetching all users for admin");
+
+    const users = await User.find({})
+      .select("-password") // Exclude password field
+      .sort({ created_at: -1 }); // Sort by newest first
+
+    console.log(`✅ Found ${users.length} users`);
+
+    res.status(200).send({
+      success: true,
+      message: "Users fetched successfully",
+      users,
+    });
+  } catch (error) {
+    console.error("❌ Error fetching users:", error);
+    res.status(500).send({
+      success: false,
+      message: "Error fetching users",
+      error: error.message,
     });
   }
 };
@@ -219,4 +299,6 @@ module.exports = {
   verifyOTPController,
   testController,
   updateProfileController,
+  cleanupRolesController,
+  getAllUsersController,
 };

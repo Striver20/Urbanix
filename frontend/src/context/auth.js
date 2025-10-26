@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
         user: parsedData.user,
         token: parsedData.token,
       });
-      localStorage.setItem("auth", JSON.stringify(data));
     }
   }, []);
 

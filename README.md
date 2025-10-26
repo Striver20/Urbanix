@@ -1,6 +1,11 @@
-# 🛒 Urbanix - E-Commerce Platform
+# 🛍️ Urbanix - Modern E-commerce Platform
 
-A modern, full-featured e-commerce application built with the MERN stack (MongoDB, Express.js, React, Node.js). Urbanix provides a seamless online shopping experience with complete user authentication, product management, shopping cart functionality, and secure payment integration using Razorpay.
+A full-stack e-commerce web application built with React.js and Node.js, featuring a modern UI, complete shopping experience, and admin dashboard.
+
+## 🌐 Live Demo
+
+- **Website**: [https://urbanix.vercel.app](https://urbanix.vercel.app) _(Update after deployment)_
+- **API**: [https://urbanix-backend.railway.app](https://urbanix-backend.railway.app) _(Update after deployment)_
 
 ## 📋 Table of Contents
 
@@ -17,94 +22,78 @@ A modern, full-featured e-commerce application built with the MERN stack (MongoD
 
 ## ✨ Features
 
-### User Features
+### 🛒 Customer Features
 
-- 🔐 **User Authentication** - Secure registration and login system
-- 🛍️ **Product Browsing** - Browse products by category
-- 🔍 **Search Functionality** - Search for products across the platform
-- 🛒 **Shopping Cart** - Add/remove items from cart
-- 💳 **Secure Payments** - Integrated Razorpay payment gateway
-- 📦 **Order Management** - Track order history and status
-- 👤 **User Profile** - Manage personal information
-- 📱 **Responsive Design** - Mobile-friendly interface
+- **Product Browsing**: Browse products by categories with modern grid/list views
+- **Search & Filter**: Advanced product search and filtering capabilities
+- **Shopping Cart**: Add/remove products with quantity management
+- **User Authentication**: Secure login/register with JWT tokens
+- **Order Management**: Complete checkout process and order history
+- **Responsive Design**: Mobile-first design with Tailwind CSS
 
-### Admin Features
+### 👨‍💼 Admin Features
 
-- 📊 **Admin Dashboard** - Comprehensive admin panel
-- ➕ **Product Management** - Create, read, update, and delete products
-- 🏷️ **Category Management** - Manage product categories
-- 👥 **User Management** - Monitor user activities
-- 📈 **Order Tracking** - Track and manage all orders
+- **Dashboard**: Comprehensive admin dashboard with analytics
+- **Product Management**: Add, edit, delete products with image uploads
+- **Category Management**: Manage product categories
+- **Order Management**: View and update order statuses
+- **User Management**: View registered users and their details
 
-## 🚀 Tech Stack
+### 🔧 Technical Features
 
-### Frontend
+- **Modern Stack**: React.js, Node.js, Express.js, MongoDB
+- **Authentication**: JWT-based secure authentication system
+- **File Upload**: Multer for handling product images
+- **Responsive UI**: Tailwind CSS with modern design patterns
+- **API Security**: Protected routes with middleware
+- **Cloud Deployment**: Vercel (Frontend) + Railway (Backend)
 
-- **React** - UI framework
-- **React Router DOM** - Client-side routing
-- **Ant Design** - UI component library
-- **Tailwind CSS** - Utility-first CSS framework
-- **Axios** - HTTP client
-- **React Context API** - State management
-- **React Toastify** - Toast notifications
+## 🛠️ Tech Stack
 
-### Backend
+**Frontend:**
 
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - ODM
-- **JWT** - Authentication
-- **Bcrypt** - Password hashing
-- **Express Formidable** - File upload handling
-- **Razorpay** - Payment gateway integration
+- React.js 18
+- Tailwind CSS
+- Ant Design components
+- Axios for API calls
+- React Router for navigation
+
+**Backend:**
+
+- Node.js & Express.js
+- MongoDB with Mongoose
+- JWT Authentication
+- Bcrypt for password hashing
+- Multer for file uploads
+- CORS enabled
+
+**Deployment:**
+
+- Frontend: Vercel
+- Backend: Railway
+- Database: MongoDB Atlas
 
 ## 📁 Project Structure
 
 ```
-Urbanix/
-├── backend/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── categoryController.js
-│   │   └── productController.js
-│   ├── helpers/
-│   │   └── authHelper.js
-│   ├── middlewares/
-│   │   └── authMiddleware.js
-│   ├── models/
-│   │   ├── userModel.js
-│   │   ├── productModel.js
-│   │   └── categoryModel.js
-│   ├── routes/
-│   │   ├── authRoute.js
-│   │   ├── categoryRoute.js
-│   │   └── productRoute.js
-│   ├── index.js
-│   └── package.json
-│
-└── frontend/
-    ├── src/
-    │   ├── Admin/
-    │   │   ├── AdminDashboard.js
-    │   │   ├── CreateProduct.js
-    │   │   ├── CreateCategory.js
-    │   │   └── Products.js
-    │   ├── Screens/
-    │   │   ├── Home.js
-    │   │   ├── Login.js
-    │   │   ├── ProductDetails.js
-    │   │   └── CartPage.js
-    │   ├── components/
-    │   ├── context/
-    │   ├── Routes/
-    │   └── App.js
-    └── package.json
+urbanix/
+├── frontend/                 # React.js frontend
+│   ├── src/
+│   │   ├── components/      # Reusable components
+│   │   ├── screens/         # Page components
+│   │   ├── admin/           # Admin dashboard
+│   │   ├── context/         # React context providers
+│   │   └── config/          # Configuration files
+│   └── public/
+└── backend/                 # Node.js backend
+    ├── controllers/         # Route controllers
+    ├── models/             # MongoDB models
+    ├── routes/             # API routes
+    ├── middlewares/        # Custom middlewares
+    └── config/             # Database configuration
 ```
 
-## 🔧 Installation
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -112,137 +101,127 @@ Urbanix/
 - MongoDB (local or Atlas)
 - Git
 
-### Backend Setup
+### Installation
 
-1. Clone the repository
+1. **Clone the repository**
 
-```bash
-git clone https://github.com/Striver20/Urbanix.git
-cd Urbanix
-```
+   ```bash
+   git clone https://github.com/yourusername/urbanix.git
+   cd urbanix
+   ```
 
-2. Navigate to backend directory
+2. **Setup Backend**
 
-```bash
-cd backend
-```
+   ```bash
+   cd backend
+   npm install
 
-3. Install dependencies
+   # Create .env file with your configurations
+   cp .env.example .env
 
-```bash
-npm install
-```
+   # Start backend server
+   npm run dev
+   ```
 
-4. Create a `.env` file in the backend directory
+3. **Setup Frontend**
+
+   ```bash
+   cd frontend
+   npm install
+
+   # Create .env file
+   cp .env.example .env
+
+   # Start frontend development server
+   npm start
+   ```
+
+4. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+
+## 🔑 Environment Variables
+
+### Backend (.env)
 
 ```env
+MONGO_URL=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
 PORT=8000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3000
+EMAIL_USER=your_email@gmail.com
+EMAIL_PASS=your_app_password
 ```
 
-5. Start the backend server
+### Frontend (.env)
 
-```bash
-npm start
+```env
+REACT_APP_API_URL=http://localhost:8000
 ```
 
-### Frontend Setup
-
-1. Navigate to frontend directory
-
-```bash
-cd frontend
-```
-
-2. Install dependencies
-
-```bash
-npm install
-```
-
-3. Start the development server
-
-```bash
-npm start
-```
-
-The application will be available at `http://localhost:3000`
-
-## ⚙️ Configuration
-
-### MongoDB Setup
-
-- Create an account on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or use a local MongoDB instance
-- Copy the connection string and add it to your `.env` file
-
-### Razorpay Setup
-
-1. Create an account on [Razorpay](https://razorpay.com/)
-2. Get your API keys from the dashboard
-3. Add the keys to your `.env` file
-
-## 🎯 Usage
-
-1. **Registration**: Create a new account or login with existing credentials
-2. **Browse Products**: Explore products by category or search
-3. **Add to Cart**: Select products and add them to your cart
-4. **Checkout**: Proceed to payment using Razorpay
-5. **Track Orders**: View your order history in the dashboard
-
-## 🔌 API Endpoints
+## 📋 API Endpoints
 
 ### Authentication
 
-- `POST /api/v1/auth/register` - Register new user
+- `POST /api/v1/auth/register` - User registration
 - `POST /api/v1/auth/login` - User login
-- `GET /api/v1/auth/check-auth` - Verify authentication
+- `GET /api/v1/auth/profile` - Get user profile
+- `PUT /api/v1/auth/profile` - Update user profile
 
 ### Products
 
-- `GET /api/v1/product/get-products` - Get all products
-- `GET /api/v1/product/get-product/:slug` - Get single product
-- `POST /api/v1/product/create-product` - Create product (Admin)
-- `PUT /api/v1/product/update-product/:pid` - Update product (Admin)
-- `DELETE /api/v1/product/delete-product/:pid` - Delete product (Admin)
+- `GET /api/v1/product` - Get all products
+- `POST /api/v1/product` - Create product (Admin)
+- `PUT /api/v1/product/:id` - Update product (Admin)
+- `DELETE /api/v1/product/:id` - Delete product (Admin)
 
 ### Categories
 
-- `GET /api/v1/category/get-category` - Get all categories
-- `GET /api/v1/category/single-category/:slug` - Get single category
-- `POST /api/v1/category/create-category` - Create category (Admin)
-- `PUT /api/v1/category/update-category/:id` - Update category (Admin)
-- `DELETE /api/v1/category/delete-category/:id` - Delete category (Admin)
+- `GET /api/v1/category` - Get all categories
+- `POST /api/v1/category` - Create category (Admin)
+- `PUT /api/v1/category/:id` - Update category (Admin)
+
+### Orders
+
+- `POST /api/v1/order/create-order` - Create new order
+- `GET /api/v1/order/user-orders` - Get user orders
+- `GET /api/v1/order/all-orders` - Get all orders (Admin)
+
+## 🚀 Deployment
+
+See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed deployment instructions using Vercel + Railway.
+
+## 🎯 Resume Highlights
+
+- **Full-Stack Development**: Complete MERN stack implementation
+- **Modern UI/UX**: Professional design with Tailwind CSS
+- **Authentication & Security**: JWT-based secure authentication
+- **Database Design**: Well-structured MongoDB schemas
+- **API Development**: RESTful API with proper error handling
+- **Cloud Deployment**: Production deployment on modern platforms
+- **Responsive Design**: Mobile-first responsive web design
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
-**Striver20**
+**Your Name**
 
-- GitHub: [@Striver20](https://github.com/Striver20)
-- Project Link: [https://github.com/Striver20/Urbanix](https://github.com/Striver20/Urbanix)
-
-## 🙏 Acknowledgments
-
-- Razorpay for payment gateway integration
-- Ant Design for UI components
-- React community for excellent documentation
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- Email: your.email@example.com
 
 ---
 
-⭐ Star this repo if you find it helpful!
+⭐ **Star this repository if you found it helpful!**

@@ -1,9 +1,9 @@
-const bcyrpt = require("bcrypt");
+const bcrypt = require("bcrypt");
 
 const hashPassword = async (password) => {
   try {
     const saltRound = 10;
-    const hashedPassword = await bcyrpt.hash(password, saltRound);
+    const hashedPassword = await bcrypt.hash(password, saltRound);
     return hashedPassword;
   } catch (error) {
     console.log("Error hashing password", error.message);
@@ -12,7 +12,7 @@ const hashPassword = async (password) => {
 
 const comparePassword = async (password, hashedPassword) => {
   try {
-    const isMatch = await bcyrpt.compare(password, hashedPassword);
+    const isMatch = await bcrypt.compare(password, hashedPassword);
     return isMatch;
   } catch (error) {
     console.log("Error comparing password", error.message);

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const { auth } = useAuth();
+  const [auth] = useAuth();
 
   const getAllProducts = async () => {
     const token = auth.token;

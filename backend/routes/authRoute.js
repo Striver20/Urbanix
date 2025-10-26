@@ -6,6 +6,8 @@ const {
   testController,
   verifyOTPController,
   updateProfileController,
+  cleanupRolesController,
+  getAllUsersController,
 } = require("../controllers/authController");
 const { requireSignIn, isAdmin } = require("../middlewares/authMiddleware");
 const router = express.Router();
@@ -34,6 +36,13 @@ router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
 });
 
 // Update Profile
+console.log("🔧 Registering profile update route: PUT /api/v1/auth/profile");
 router.put("/profile", requireSignIn, updateProfileController);
+
+// Cleanup Roles (Admin only - one-time use)
+router.post("/cleanup-roles", requireSignIn, isAdmin, cleanupRolesController);
+
+// Get All Users (Admin only)
+router.get("/users", requireSignIn, isAdmin, getAllUsersController);
 
 module.exports = router;
